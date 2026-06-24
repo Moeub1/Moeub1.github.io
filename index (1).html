@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moeub Lanh II — Mechanical Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background-color: #f4f3ec;
+      background-image: linear-gradient(#e0ddd0 1px, transparent 1px), linear-gradient(90deg, #e0ddd0 1px, transparent 1px);
+      background-size: 34px 34px;
+      color: #1c1b18;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 40px;
+      border-bottom: 1px solid #1c1b18;
+      background: rgba(244,243,236,.86);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo { text-decoration: none; color: #1c1b18; font-weight: 700; font-size: 18px; letter-spacing: .02em; }
+    .nav-logo span { color: #2a52cc; }
+    .nav-links { display: flex; gap: 24px; font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
+    .nav-links a { text-decoration: none; color: #1c1b18; transition: color .2s ease; }
+    .nav-links a:hover { color: #2a52cc; }
+    .nav-links a .num { color: #2a52cc; }
+    .nav-badge {
+      display: flex; align-items: center; gap: 7px;
+      font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .1em;
+      border: 1px solid #1c1b18; background: #f4f3ec; padding: 6px 10px;
+    }
+    .nav-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #2a52cc; flex-shrink: 0; }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px;
+      padding: 84px 0 80px; align-items: center; scroll-margin-top: 80px;
+    }
+    .hero-kicker {
+      display: flex; align-items: center; gap: 12px;
+      font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .12em;
+      text-transform: uppercase; color: #2a52cc; margin-bottom: 28px;
+    }
+    .hero-kicker-line { width: 44px; height: 1px; background: #2a52cc; flex-shrink: 0; }
+    .hero-h1 { margin: 0; font-size: 72px; line-height: .98; font-weight: 700; letter-spacing: -.025em; }
+    .hero-p { margin: 28px 0 0; font-size: 17px; line-height: 1.65; color: #46443d; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; margin-top: 38px; }
+    .btn-primary {
+      text-decoration: none; background: #1c1b18; color: #f4f3ec;
+      font: 500 13px 'Space Grotesk', sans-serif; padding: 14px 24px;
+      display: inline-block; transition: background .2s ease;
+    }
+    .btn-primary:hover { background: #2a52cc; }
+    .btn-outline {
+      text-decoration: none; color: #1c1b18; border: 1px solid #1c1b18;
+      font: 500 13px 'Space Grotesk', sans-serif; padding: 14px 24px;
+      display: inline-block; transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-outline:hover { background: #2a52cc; color: #f4f3ec; border-color: #2a52cc; }
+    .hero-img {
+      position: relative; aspect-ratio: 4/5; border: 1px solid #1c1b18;
+      background: repeating-linear-gradient(45deg, #e9e7dd 0 11px, #f1efe6 11px 22px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-cross-h { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(28,27,24,.28); }
+    .hero-img-cross-v { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(28,27,24,.28); }
+    .hero-img-tl { position: absolute; top: 12px; left: 12px; font: 500 10px 'IBM Plex Mono', monospace; color: #46443d; }
+    .hero-img-br { position: absolute; bottom: 12px; right: 12px; font: 500 10px 'IBM Plex Mono', monospace; color: #46443d; }
+    .ph-chip { background: #f4f3ec; border: 1px solid #1c1b18; padding: 9px 13px; font: 500 11px 'IBM Plex Mono', monospace; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 64px 0; border-top: 1px solid #1c1b18; scroll-margin-top: 72px; }
+    .section-label { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #2a52cc; margin-bottom: 36px; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: start; }
+    .about-h2 { margin: 0; font-size: 38px; font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
+    .about-p { margin: 0; font-size: 17px; line-height: 1.7; color: #46443d; }
+    .about-p + .about-p { margin-top: 18px; }
+    .about-stats { display: flex; gap: 40px; margin-top: 32px; flex-wrap: wrap; }
+    .stat-num { font-size: 34px; font-weight: 700; letter-spacing: -.02em; }
+    .stat-label { font: 500 11px 'IBM Plex Mono', monospace; color: #46443d; margin-top: 2px; }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      border: 1px solid #1c1b18; background: #f4f3ec; padding: 34px 36px;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center;
+    }
+    .edu-icon {
+      width: 64px; height: 64px; border: 1px solid #1c1b18;
+      display: flex; align-items: center; justify-content: center;
+      font: 700 22px 'Space Grotesk', sans-serif; color: #2a52cc;
+    }
+    .edu-title { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.01em; }
+    .edu-sub { margin-top: 6px; font-size: 15px; color: #46443d; }
+    .edu-date { text-align: right; font: 500 11px 'IBM Plex Mono', monospace; color: #46443d; line-height: 1.6; }
+    .edu-date span { color: #1c1b18; font-size: 15px; display: block; margin-top: 2px; }
+
+    /* ── EXPERIENCE & SKILLS ── */
+    .exp-skills-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: start; }
+    .exp-col { padding-right: 48px; }
+    .toolkit-col { border-left: 1px solid #1c1b18; padding-left: 48px; }
+    .col-h2 { margin: 0 0 24px; font-size: 28px; font-weight: 700; letter-spacing: -.015em; }
+    .timeline { position: relative; padding-left: 26px; border-left: 1px solid #1c1b18; display: flex; flex-direction: column; gap: 30px; }
+    .tl-item { position: relative; }
+    .tl-dot { position: absolute; left: -32px; top: 5px; width: 9px; height: 9px; border: 1px solid #1c1b18; }
+    .tl-dot.active { background: #2a52cc; }
+    .tl-dot.empty { background: #f4f3ec; }
+    .tl-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 5px; }
+    .tl-company { font: 500 11px 'IBM Plex Mono', monospace; color: #2a52cc; }
+    .tl-company.muted { color: #46443d; }
+    .tl-date { font: 500 10px 'IBM Plex Mono', monospace; color: #46443d; white-space: nowrap; }
+    .tl-role { margin: 0 0 8px; font-size: 18px; font-weight: 600; }
+    .tl-desc { margin: 0; font-size: 14px; line-height: 1.6; color: #46443d; }
+    .tl-biz { position: relative; margin-top: 6px; padding-top: 24px; border-top: 1px dashed #c9c6ba; }
+    .tl-biz-marker { position: absolute; left: -33px; top: 29px; width: 11px; height: 11px; background: #1c1b18; transform: rotate(45deg); }
+    .tl-biz-company { font: 500 11px 'IBM Plex Mono', monospace; color: #1c1b18; }
+    .toolkit { display: flex; flex-direction: column; gap: 22px; }
+    .toolkit-cat { font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #2a52cc; margin-bottom: 12px; }
+    .toolkit-tags { display: flex; flex-wrap: wrap; gap: 8px; font: 500 12px 'IBM Plex Mono', monospace; }
+    .tag { border: 1px solid #1c1b18; padding: 7px 12px; }
+
+    /* ── PROJECTS ── */
+    .proj-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+    .proj-label { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #2a52cc; }
+    .proj-legend-label { font: 500 11px 'IBM Plex Mono', monospace; color: #46443d; }
+    .proj-legend { display: flex; gap: 18px; margin-bottom: 30px; font: 500 10px 'IBM Plex Mono', monospace; color: #46443d; flex-wrap: wrap; align-items: center; }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-sq { width: 9px; height: 9px; border: 1px solid #2f8f5b; background: #2f8f5b; }
+    .legend-dot { width: 9px; height: 9px; border: 1px solid #c98a2b; border-radius: 50%; }
+    .legend-hint { color: #9a978c; }
+
+    /* featured */
+    .featured-card {
+      border: 1px solid #1c1b18; background: #f4f3ec;
+      display: grid; grid-template-columns: 1.1fr .9fr;
+      margin-bottom: 22px; cursor: pointer; transition: background .2s ease;
+    }
+    .featured-card:hover { background: #eceadf; }
+    .featured-body { padding: 38px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-kicker { display: flex; align-items: center; gap: 10px; font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .1em; color: #2a52cc; margin-bottom: 16px; }
+    .featured-kicker-badge { border: 1px solid #2a52cc; padding: 3px 7px; }
+    .featured-title { margin: 0 0 12px; font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+    .featured-blurb { margin: 0 0 18px; font-size: 15px; line-height: 1.65; color: #46443d; }
+    .featured-tags { display: flex; gap: 7px; flex-wrap: wrap; font: 500 10px 'IBM Plex Mono', monospace; color: #46443d; margin-bottom: 18px; }
+    .featured-tag { border: 1px solid #1c1b18; padding: 5px 9px; }
+    .featured-more { font: 500 11px 'IBM Plex Mono', monospace; color: #2a52cc; }
+    .featured-img {
+      position: relative; border-left: 1px solid #1c1b18;
+      background: repeating-linear-gradient(45deg, #e9e7dd 0 11px, #f1efe6 11px 22px);
+      min-height: 300px; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* status badges */
+    .badge-wip {
+      position: absolute; top: 8px; right: 9px;
+      display: flex; align-items: center; gap: 4px;
+      background: #f4f3ec; border: 1px solid #c98a2b; color: #c98a2b;
+      font: 500 9px 'IBM Plex Mono', monospace; letter-spacing: .06em; padding: 3px 7px;
+    }
+    .badge-wip.lg { top: 12px; right: 12px; padding: 4px 8px; gap: 5px; }
+    .badge-wip-dot { width: 5px; height: 5px; border-radius: 50%; background: #c98a2b; flex-shrink: 0; }
+    .badge-complete {
+      position: absolute; top: 8px; right: 9px;
+      display: flex; align-items: center; gap: 4px;
+      background: #f4f3ec; border: 1px solid #2f8f5b; color: #2f8f5b;
+      font: 500 9px 'IBM Plex Mono', monospace; letter-spacing: .06em; padding: 3px 7px;
+    }
+    .badge-complete.lg { top: 12px; right: 14px; padding: 4px 9px; font-size: 10px; }
+
+    /* cards grid */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .proj-card { border: 1px solid #1c1b18; background: #f4f3ec; display: flex; flex-direction: column; cursor: pointer; transition: background .2s ease; }
+    .proj-card:hover { background: #eceadf; }
+    .proj-card-img {
+      aspect-ratio: 16/10; border-bottom: 1px solid #1c1b18;
+      background: repeating-linear-gradient(45deg, #e9e7dd 0 11px, #f1efe6 11px 22px);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      font: 500 11px 'IBM Plex Mono', monospace; color: #46443d;
+    }
+    .card-num { position: absolute; top: 9px; left: 10px; font-size: 9px; }
+    .proj-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+    .card-tags-line { font: 500 10px 'IBM Plex Mono', monospace; color: #2a52cc; margin-bottom: 9px; }
+    .card-title { margin: 0 0 7px; font-size: 17px; font-weight: 600; }
+    .card-blurb { margin: 0; font-size: 13px; line-height: 1.55; color: #46443d; flex: 1; }
+    .card-more { margin-top: 14px; font: 500 10px 'IBM Plex Mono', monospace; color: #2a52cc; }
+
+    /* project index */
+    .proj-index { margin-top: 54px; border-top: 1px solid #1c1b18; padding-top: 40px; }
+    .proj-index-hdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .proj-index-h2 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -.015em; }
+    .proj-index-count { font: 500 11px 'IBM Plex Mono', monospace; color: #46443d; }
+    .proj-index-desc { margin: 0 0 30px; font-size: 14px; line-height: 1.6; color: #46443d; max-width: 560px; }
+    .index-groups { display: flex; flex-direction: column; gap: 30px; }
+    .index-group-label { font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #2a52cc; margin-bottom: 6px; }
+    .index-group-list { border-top: 1px solid #1c1b18; }
+    .index-row {
+      display: grid; grid-template-columns: 42px 1fr auto; gap: 16px; align-items: center;
+      padding: 13px 6px; border-bottom: 1px solid #d8d5c9; cursor: pointer;
+      transition: background .15s ease, padding-left .15s ease;
+    }
+    .index-row:hover { background: #eceadf; padding-left: 14px; }
+    .index-n { font: 500 11px 'IBM Plex Mono', monospace; color: #9a978c; }
+    .index-title { font-size: 15px; font-weight: 500; }
+    .idx-complete { display: inline-flex; align-items: center; gap: 6px; font: 500 10px 'IBM Plex Mono', monospace; color: #2f8f5b; white-space: nowrap; }
+    .idx-complete-sq { width: 8px; height: 8px; background: #2f8f5b; flex-shrink: 0; }
+    .idx-wip { display: inline-flex; align-items: center; gap: 6px; font: 500 10px 'IBM Plex Mono', monospace; color: #c98a2b; white-space: nowrap; }
+    .idx-wip-dot { width: 8px; height: 8px; border-radius: 50%; background: #c98a2b; flex-shrink: 0; }
+
+    /* ── INTERESTS ── */
+    .interests-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .interest-card {
+      border: 1px solid #1c1b18; background: #f4f3ec;
+      padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 16px;
+      transition: background .2s ease;
+    }
+    .interest-card:hover { background: #eceadf; }
+    .interest-label { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .04em; text-align: center; }
+    .interest-icon { display: block; position: relative; }
+
+    /* ── CONTACT ── */
+    .contact-section { padding: 80px 0 96px; border-top: 1px solid #1c1b18; scroll-margin-top: 72px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+    .contact-h2 { margin: 0; font-size: 48px; font-weight: 700; letter-spacing: -.025em; line-height: 1.02; }
+    .contact-p { margin: 22px 0 0; font-size: 16px; line-height: 1.65; color: #46443d; max-width: 380px; }
+    .contact-links { display: flex; flex-direction: column; border: 1px solid #1c1b18; }
+    .contact-row {
+      text-decoration: none; color: #1c1b18;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 22px; border-bottom: 1px solid #1c1b18;
+      transition: background .2s ease, color .2s ease;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row:hover { background: #2a52cc; color: #f4f3ec; }
+    .contact-row-label { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+    .contact-row-val { font-size: 15px; font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1c1b18; padding: 22px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      font: 500 11px 'IBM Plex Mono', monospace; color: #46443d;
+      background: rgba(244,243,236,.6);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(28,27,24,.55); backdrop-filter: blur(3px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 48px 24px; overflow: auto;
+    }
+    .modal-overlay[hidden] { display: none; }
+    .modal-box {
+      background: #f4f3ec; border: 1px solid #1c1b18;
+      max-width: 780px; width: 100%; box-shadow: 0 24px 60px rgba(0,0,0,.3);
+      background-image: linear-gradient(#e0ddd0 1px, transparent 1px), linear-gradient(90deg, #e0ddd0 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+    .modal-hdr {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 26px; border-bottom: 1px solid #1c1b18;
+      background: rgba(244,243,236,.7);
+    }
+    .modal-cat { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .1em; color: #2a52cc; }
+    .modal-close {
+      cursor: pointer; width: 30px; height: 30px; border: 1px solid #1c1b18;
+      display: flex; align-items: center; justify-content: center; font-size: 15px;
+      background: transparent; transition: background .2s ease, color .2s ease;
+    }
+    .modal-close:hover { background: #2a52cc; color: #f4f3ec; }
+    .modal-img {
+      position: relative; border-bottom: 1px solid #1c1b18;
+      background: repeating-linear-gradient(45deg, #e9e7dd 0 13px, #f1efe6 13px 26px);
+      aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center;
+    }
+    .modal-body { padding: 30px 32px 36px; }
+    .modal-title { margin: 0 0 8px; font-size: 28px; font-weight: 700; letter-spacing: -.02em; }
+    .modal-period { font: 500 11px 'IBM Plex Mono', monospace; color: #46443d; margin-bottom: 18px; }
+    .modal-detail { margin: 0 0 22px; font-size: 15px; line-height: 1.7; color: #36352f; }
+    .modal-stack-label { font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #2a52cc; margin-bottom: 12px; }
+    .modal-tags { display: flex; gap: 8px; flex-wrap: wrap; font: 500 11px 'IBM Plex Mono', monospace; color: #46443d; }
+    .modal-tag { border: 1px solid #1c1b18; padding: 6px 11px; }
+
+    /* ── SCROLL REVEAL ── */
+    [data-reveal] {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal].visible { opacity: 1; transform: none; }
+  </style>
+  <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <a href="#top" class="nav-logo">MOEUB<span>.</span></a>
+  <div class="nav-links">
+    <a href="#about"><span class="num">01</span> About</a>
+    <a href="#education"><span class="num">02</span> Education</a>
+    <a href="#skills"><span class="num">03</span> Experience</a>
+    <a href="#projects"><span class="num">04</span> Projects</a>
+    <a href="#interests"><span class="num">05</span> Interests</a>
+    <a href="#contact"><span class="num">06</span> Contact</a>
+  </div>
+  <div class="nav-badge"><span class="nav-badge-dot"></span>AVAILABLE &mdash; 2026</div>
+</nav>
+
+<div id="top" class="container">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div data-reveal>
+      <div class="hero-kicker">
+        <span class="hero-kicker-line"></span> Mechanical Engineer / Mechatronics
+      </div>
+      <h1 class="hero-h1">Building Things<br>That Move.</h1>
+      <p class="hero-p">Mechanical Engineering at the FAMU/FSU College of Engineering, working where hardware meets software &mdash; robotics, mechatronics, embedded systems and the machines that bring them together.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects &rarr;</a>
+        <a href="#contact" class="btn-outline">Get in touch</a>
+      </div>
+    </div>
+    <div data-reveal class="hero-img">
+      <div class="hero-img-cross-h"></div>
+      <div class="hero-img-cross-v"></div>
+      <div class="hero-img-tl">FIG.01</div>
+      <div class="hero-img-br">x:00.00 y:00.00</div>
+      <div class="ph-chip">[ portrait / build photo ]</div>
+    </div>
+  </header>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section">
+    <div data-reveal class="section-label">[ 01 / About ]</div>
+    <div class="about-grid">
+      <h2 data-reveal class="about-h2">Engineer.<br>Builder.<br>Problem solver.</h2>
+      <div data-reveal>
+        <p class="about-p">I&rsquo;m a Mechanical Engineering major with a Mechatronics focus at the FAMU/FSU College of Engineering, with hands-on experience across aerospace, refrigeration and packaging manufacturing. Across four internships and co-op rotations &mdash; including two with Delta Air Lines &mdash; I&rsquo;ve worked on aircraft assemblies, industrial robotics, production fixtures and embedded hardware.</p>
+        <p class="about-p" style="margin-top:18px">What drives me is the intersection of mechanical design and electronics. Whether it&rsquo;s building an autonomous quadcopter from scratch, designing a rotor current meter for divers or improving a robot cell to cut scrap, I&rsquo;m happiest turning an idea into something physical and functional.</p>
+        <div class="about-stats">
+          <div><div class="stat-num">4</div><div class="stat-label">INTERNSHIPS / CO-OPS</div></div>
+          <div><div class="stat-num">$100K+</div><div class="stat-label">SAVED &mdash; WESTROCK</div></div>
+          <div><div class="stat-num">30+</div><div class="stat-label">PROJECTS BUILT</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section id="education" class="section">
+    <div data-reveal class="section-label">[ 02 / Education ]</div>
+    <div data-reveal class="edu-card">
+      <div class="edu-icon">F</div>
+      <div>
+        <h3 class="edu-title">B.S. Mechanical Engineering &mdash; Mechatronics Focus</h3>
+        <div class="edu-sub">Florida A&amp;M University &middot; FAMU/FSU College of Engineering</div>
+      </div>
+      <div class="edu-date">EXPECTED<span>FALL 2026</span></div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE & SKILLS ===== -->
+  <section id="skills" class="section">
+    <div data-reveal class="section-label">[ 03 / Experience &amp; Skills ]</div>
+    <div class="exp-skills-grid">
+
+      <!-- Experience -->
+      <div data-reveal class="exp-col">
+        <h2 class="col-h2">Experience</h2>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <span class="tl-dot active"></span>
+            <div class="tl-meta">
+              <div class="tl-company">DELTA AIR LINES &middot; ROTATION 2 &middot; CURRENT</div>
+              <div class="tl-date">2026 &ndash; PRESENT</div>
+            </div>
+            <h3 class="tl-role">Manufacturing Engineering Co-Op</h3>
+            <p class="tl-desc">My second Delta rotation, now on the manufacturing side. Designed and 3D-printed production tooling &mdash; aluminum trim guides, P-seal hole and cut locators, sheet-metal plates and more &mdash; partnered with production to solve floor issues, and ran shear tests on glue-bond strength.</p>
+          </div>
+
+          <div class="tl-item">
+            <span class="tl-dot empty"></span>
+            <div class="tl-meta">
+              <div class="tl-company muted">DELTA AIR LINES &middot; ROTATION 1</div>
+              <div class="tl-date">SPRING 2025</div>
+            </div>
+            <h3 class="tl-role">Mechanical Integration Engineering Co-Op</h3>
+            <p class="tl-desc">Authored and revised assemblies and drawings of monuments on Airbus and Boeing aircraft across Delta&rsquo;s fleet. Designed a fume extractor to pull VOCs and particulates from enclosed 3D printers and soldering stations &mdash; bridging the mechanical and electrical teams.</p>
+          </div>
+
+          <div class="tl-item">
+            <span class="tl-dot empty"></span>
+            <div class="tl-meta">
+              <div class="tl-company muted">HEATCRAFT WORLDWIDE REFRIGERATION</div>
+              <div class="tl-date">FALL 2024</div>
+            </div>
+            <h3 class="tl-role">Manufacturing Engineering Intern</h3>
+            <p class="tl-desc">Improved a robot arm to reduce scrap, and 3D-printed conveyor bumpers to improve operator safety. Built additive-manufacturing aids that ensured precise, consistent measurement of copper tube length on hairpin bends.</p>
+          </div>
+
+          <div class="tl-item">
+            <span class="tl-dot empty"></span>
+            <div class="tl-meta">
+              <div class="tl-company muted">WESTROCK PACKAGING SYSTEMS</div>
+              <div class="tl-date">SUMMER 2024</div>
+            </div>
+            <h3 class="tl-role">Mechanical Engineering Intern</h3>
+            <p class="tl-desc">Designed mechanical fixtures that improved safety when servicing packaging lines. Saved ~$100K sourcing and organizing parts for $2M high-speed machines, and enhanced a $3M line through diagnostics, QC and custom-designed upgrades.</p>
+          </div>
+
+          <div class="tl-biz">
+            <span class="tl-biz-marker"></span>
+            <div class="tl-meta">
+              <div class="tl-biz-company">MECH PRINTS &middot; MY BUSINESS</div>
+              <div class="tl-date">2024 &ndash; PRESENT</div>
+            </div>
+            <h3 class="tl-role">Founder</h3>
+            <p class="tl-desc">A 3D printing and design consulting business I founded for functional FDM and MSLA parts &mdash; from standard PLA to high-performance TPU, Nylon and Carbon/Glass Fiber, backed by design-for-manufacturability and assembly consultation.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Toolkit -->
+      <div data-reveal class="toolkit-col">
+        <h2 class="col-h2">Toolkit</h2>
+        <div class="toolkit">
+          <div>
+            <div class="toolkit-cat">// CAD &amp; Simulation</div>
+            <div class="toolkit-tags">
+              <span class="tag">CREO Parametric</span><span class="tag">SolidWorks</span>
+              <span class="tag">Solid Edge</span><span class="tag">Fusion 360</span>
+              <span class="tag">AutoCAD</span><span class="tag">Onshape</span>
+              <span class="tag">Shapr3D</span><span class="tag">COMSOL</span>
+            </div>
+          </div>
+          <div>
+            <div class="toolkit-cat">// Manufacturing &amp; Hardware</div>
+            <div class="toolkit-tags">
+              <span class="tag">DFA</span><span class="tag">DFM</span><span class="tag">GD&amp;T</span>
+              <span class="tag">Machining</span><span class="tag">Soldering</span>
+              <span class="tag">3D Printing (FDM/MSLA)</span><span class="tag">3D Scanning</span>
+              <span class="tag">Scan-to-CAD</span><span class="tag">Arduino</span>
+              <span class="tag">Raspberry Pi</span><span class="tag">ESP32</span>
+            </div>
+          </div>
+          <div>
+            <div class="toolkit-cat">// Software</div>
+            <div class="toolkit-tags">
+              <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span>
+              <span class="tag">MATLAB</span><span class="tag">LaTeX</span>
+              <span class="tag">Cura</span><span class="tag">PrusaSlicer</span>
+              <span class="tag">Lychee Slicer</span><span class="tag">CrealityScan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="section">
+    <div data-reveal class="proj-header">
+      <div class="proj-label">[ 04 / Projects ]</div>
+      <span class="proj-legend-label">SHOWCASE + FULL INDEX</span>
+    </div>
+    <div data-reveal class="proj-legend">
+      <span class="legend-item"><span class="legend-sq"></span>COMPLETE</span>
+      <span class="legend-item"><span class="legend-dot"></span>IN PROGRESS</span>
+      <span class="legend-hint">&middot; click any project to learn more</span>
+    </div>
+
+    <!-- Featured card -->
+    <div data-reveal class="featured-card" id="featured-card">
+      <div class="featured-body">
+        <div class="featured-kicker">
+          <span class="featured-kicker-badge">FEATURED</span> PROJ.01
+        </div>
+        <h3 class="featured-title">Autonomous GPS-Denied Quadcopter</h3>
+        <p class="featured-blurb">A drone designed to fly without GPS, avoid obstacles and land on target pads &mdash; Portenta H7, SpeedyBee F405, UWB, range sensors and a PS5 manual override.</p>
+        <div class="featured-tags">
+          <span class="featured-tag">Portenta H7</span>
+          <span class="featured-tag">SpeedyBee F405</span>
+          <span class="featured-tag">UWB</span>
+          <span class="featured-tag">POMCP</span>
+          <span class="featured-tag">FreeRTOS</span>
+        </div>
+        <div class="featured-more">LEARN MORE &rarr;</div>
+      </div>
+      <div class="featured-img">
+        <div class="badge-wip lg"><span class="badge-wip-dot"></span>IN PROGRESS</div>
+        <div class="ph-chip">[ quadcopter photo ]</div>
+      </div>
+    </div>
+
+    <!-- Showcase grid (rendered by JS) -->
+    <div data-reveal class="cards-grid" id="cards-grid"></div>
+
+    <!-- Project index (rendered by JS) -->
+    <div data-reveal class="proj-index">
+      <div class="proj-index-hdr">
+        <h2 class="proj-index-h2">Project Index</h2>
+        <span class="proj-index-count" id="index-count"></span>
+      </div>
+      <p class="proj-index-desc">The complete archive &mdash; coursework, personal builds and manufacturing work. Click any entry for detail.</p>
+      <div class="index-groups" id="index-groups"></div>
+    </div>
+  </section>
+
+  <!-- ===== INTERESTS ===== -->
+  <section id="interests" class="section">
+    <div data-reveal class="section-label">[ 05 / Interests ]</div>
+    <div data-reveal class="interests-grid">
+
+      <div class="interest-card">
+        <span class="interest-icon" style="width:24px;height:24px;border:1px solid #1c1b18">
+          <span style="position:absolute;inset:5px;border:1px solid #2a52cc;display:block"></span>
+        </span>
+        <span class="interest-label">3D PRINTING</span>
+      </div>
+
+      <div class="interest-card">
+        <span class="interest-icon" style="width:24px;height:24px;border:1px solid #1c1b18;border-radius:50%">
+          <span style="position:absolute;inset:7px;border-radius:50%;background:#2a52cc;display:block"></span>
+        </span>
+        <span class="interest-label">GAMING</span>
+      </div>
+
+      <div class="interest-card">
+        <span style="width:22px;height:22px;border:1px solid #1c1b18;background:#2a52cc;transform:rotate(45deg);display:block"></span>
+        <span class="interest-label">WORKING OUT</span>
+      </div>
+
+      <div class="interest-card">
+        <span style="width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-bottom:22px solid #2a52cc;display:block"></span>
+        <span class="interest-label">COOKING</span>
+      </div>
+
+      <div class="interest-card">
+        <span style="width:24px;height:24px;border-radius:50%;background:#2a52cc;display:flex;align-items:center;justify-content:center;color:#f4f3ec;font:600 11px 'Space Grotesk',sans-serif">8</span>
+        <span class="interest-label">POOL</span>
+      </div>
+
+      <div class="interest-card">
+        <span class="interest-icon" style="width:24px;height:24px">
+          <span style="position:absolute;top:11px;left:0;right:0;height:2px;background:#2a52cc;display:block"></span>
+          <span style="position:absolute;left:11px;top:0;bottom:0;width:2px;background:#1c1b18;display:block"></span>
+        </span>
+        <span class="interest-label">TRAVELING</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="contact-section">
+    <div data-reveal class="section-label">[ 06 / Contact ]</div>
+    <div class="contact-grid">
+      <div data-reveal>
+        <h2 class="contact-h2">Let&rsquo;s build<br>something.</h2>
+        <p class="contact-p">Open to internship and full-time roles in mechanical design, robotics and mechatronics. Based in Tallahassee, FL &mdash; reach out, I&rsquo;d love to talk.</p>
+      </div>
+      <div data-reveal class="contact-links">
+        <a id="email-link" href="#" class="contact-row">
+          <span class="contact-row-label">EMAIL</span>
+          <span class="contact-row-val" id="email-display"></span>
+        </a>
+        <a href="tel:+18633079336" class="contact-row">
+          <span class="contact-row-label">PHONE</span>
+          <span class="contact-row-val">(863) 307-9336 &rarr;</span>
+        </a>
+        <a href="https://www.linkedin.com/in/moeublanhii" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-row-label">LINKEDIN</span>
+          <span class="contact-row-val">in/moeublanhii &rarr;</span>
+        </a>
+        <a href="https://github.com/moeub1" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-row-label">GITHUB</span>
+          <span class="contact-row-val">github.com/moeub1 &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <span>&copy; 2026 MOEUB LANH II &mdash; BUILT WITH PURPOSE</span>
+  <span>MECHANICAL ENGINEER / MECHATRONICS</span>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div id="modal-overlay" class="modal-overlay" hidden>
+  <div class="modal-box" id="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-cat" id="modal-cat"></div>
+      <button class="modal-close" id="modal-close" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="modal-img" id="modal-img">
+      <div id="modal-status-badge"></div>
+      <div class="ph-chip" id="modal-ph"></div>
+    </div>
+    <div class="modal-body">
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-period" id="modal-period"></div>
+      <p class="modal-detail" id="modal-detail"></p>
+      <div class="modal-stack-label">// Stack &amp; Methods</div>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── email ── */
+  var addr = ['moeub1', 'gmail.com'].join('@');
+  document.getElementById('email-link').href = 'mailto:' + addr;
+  document.getElementById('email-display').textContent = addr + ' →';
+
+  /* ── project data ── */
+  var MID = ' · ';
+  var SCHOOL   = 'School / Engineering & Design';
+  var PERSONAL = 'Personal / Software, Electronics & Fabrication';
+  var WORK     = 'Work / Manufacturing & Automation';
+
+  var projects = [
+    /* featured */
+    { featured:true, card:true, num:'PROJ.01', cat:'School', catLabel:'School / Engineering Project',
+      title:'Autonomous GPS-Denied Quadcopter', status:'wip', period:'Fall 2024 – Present',
+      ph:'[ quadcopter photo ]', tagList:['Portenta H7','SpeedyBee F405','UWB','POMCP','FreeRTOS'],
+      blurb:'A drone designed to fly without GPS, avoid obstacles and land on target pads — Portenta H7, SpeedyBee F405, UWB, range sensors and a PS5 manual override.',
+      detail:'A drone built to fly without GPS: it avoids obstacles and lands on target pads using a Portenta H7 paired with a SpeedyBee F405 flight controller, UWB ranging and a suite of range sensors, with a PS5 controller for manual override. A POMCP planner handles pathfinding and FreeRTOS manages tasks across cores. Ongoing — currently refining the navigation stack and sensor fusion.' },
+
+    /* showcase cards */
+    { card:true, num:'PROJ.02', cat:'School', catLabel:'School / Senior Design',
+      title:'Underwater Diver Stabilization', status:'done', period:'Fall 2025 – Spring 2026',
+      ph:'[ RCM + dive rig ]', tagList:['Senior Design','Rotor Current Meter','IMU','ArduSub / Pixhawk','Control'],
+      blurb:'Wearable system that helps a diver hold position against current, buoyancy and unwanted rotation. I built the rotor current meter and its web UI.',
+      detail:'A wearable underwater system meant to help a diver hold position against current, buoyancy changes and unwanted rotation. The team worked through thrusters, batteries, waterproofing, IMUs and ArduSub / Pixhawk / Raspberry Pi options plus the control logic. My biggest contribution was building the rotor current meter (the flow sensor) and its web UI — and I owned all of the wiring, electrical design and 3D printing.' },
+    { card:true, num:'PROJ.03', cat:'Personal', catLabel:'Personal / Open-Source Software',
+      title:'OpenTrace', status:'wip', period:'Personal · In Progress',
+      ph:'[ OpenTrace UI ]', tagList:['Software','Image Tracing','Local-first','Gridfinity'],
+      blurb:'Local tool-tracing app for foam, drawer, CNC or Gridfinity-style layouts — image upload, scale calibration, outline tracing and exports.',
+      detail:'A local-first tool-tracing and layout app for creating foam, drawer, CNC or Gridfinity-style tool layouts. It is being built to handle image upload, scale calibration, outline tracing, exports and local project files — all without a cloud dependency.' },
+    { card:true, num:'PROJ.04', cat:'Personal', catLabel:'Personal / Mechatronics',
+      title:'Robotic Actuator', status:'wip', period:'Personal · In Progress',
+      ph:'[ motor + driver ]', tagList:['BLDC','FOC','ODrive / ODESC','Encoders'],
+      blurb:'Field-oriented brushless motor control with Flipsky ODESC / ODrive-style drivers and encoders — dialing in speed, torque and angle control.',
+      detail:'A motor-control project around field-oriented control of brushless DC motors, using Flipsky ODESC and ODrive-style drivers with encoders for closed-loop feedback. The goal is a solid understanding of speed, torque and angle control for use as a reusable robotic actuator.' },
+    { card:true, num:'PROJ.05', cat:'School', catLabel:'School / Engineering Project',
+      title:'Terrain Tamer Stair-Climbing Robot', status:'done', period:'Spring 2024',
+      ph:'[ terrain rover ]', tagList:['CREO Parametric','3D Printing','Robotics'],
+      blurb:'3D-printed three-wheeled robotic vehicle designed in CREO, with material and wheel geometry optimized to climb stairs and rough terrain.',
+      detail:'A 3D-printed three-wheeled robotic vehicle designed in CREO Parametric, focused on climbing stairs and handling rough terrain. Material selection and wheel geometry were optimized so the vehicle could reliably ascend steps.' },
+    { card:true, num:'PROJ.06', cat:'School', catLabel:'School / Design Project',
+      title:'Hands-Free Aluminum Strip Bender', status:'done', period:'School Project',
+      ph:'[ bending device ]', tagList:['Mechanical Design','Motor Sizing','DFM'],
+      blurb:'A single-unit, hands-free machine that bends a 12-inch aluminum strip to 90° — motor sizing, couplings, shafts and printed housings.',
+      detail:'A device designed to bend a 12-inch aluminum strip to 90 degrees as a single-unit, hands-free machine. The work covered motor sizing, couplings, shafts, 3D-printed housings and overall manufacturability.' },
+    { card:true, num:'PROJ.07', cat:'Personal', catLabel:'Personal / Infrastructure',
+      title:'Homelab', status:'wip', period:'Personal · In Progress',
+      ph:'[ homelab rack ]', tagList:['Self-Hosted','Networking','Servers'],
+      blurb:'Building out a self-hosted homelab for projects, storage and services — actively expanding the hardware and stack.',
+      detail:'A self-hosted homelab I am actively building out to run my own services, storage and project infrastructure. Still expanding the hardware and software stack.' },
+    { card:true, num:'PROJ.08', cat:'Personal', catLabel:'Work / Productivity Tool',
+      title:'Epicor / Smartsheet Automation Tool', status:'wip', period:'Personal · In Progress',
+      ph:'[ automation tool ]', tagList:['Python','Automation','Packaged EXE'],
+      blurb:'Local automation that checks IDA data, verifies release/revision info in Epicor, compares against Smartsheet and preps updates — packaged as an EXE.',
+      detail:'A local automation tool that checks IDA data, verifies release and revision information in Epicor, compares it against Smartsheet and prepares updates. Designed to be packaged as a standalone executable so it can run on a work computer without Python or VS Code installed.' },
+    { card:true, num:'PROJ.09', cat:'School', catLabel:'School / Engineering Project',
+      title:'Sun-Tracking Solar Panel', status:'done', period:'Summer 2023',
+      ph:'[ solar tracker ]', tagList:['Arduino','Stepper Motors','Photoresistors'],
+      blurb:'Dual-axis solar tracker with 180° tilt and rotation, using four photoresistors and an Arduino to follow the sun.',
+      detail:'A dual-axis solar tracker using two gear-driven stepper motors for 180 degrees of tilt and rotation. Four photoresistors feed an Arduino that detects and continuously tracks the sun for maximum energy capture.' },
+
+    /* index-only: School */
+    { cat:'School', catLabel:SCHOOL, title:'TurtleBot / Robotics Lab Control', status:'done', period:'Robotics Coursework', tagList:['ROS','Odometry','Closed-Loop'], detail:'Robotics lab work involving robot motion, odometry, distance commands and closed-loop behavior, tied to my robotics and mechatronics coursework.' },
+    { cat:'School', catLabel:SCHOOL, title:'UWB Ranging Testbed', status:'done', period:'Project Support', tagList:['RYUW122','Serial','Ranging'], detail:'A testbed for REYAX RYUW122 Lite UWB modules doing tag/anchor ranging. I debugged serial communication, addressing, network IDs and module setup for later use in larger systems like the quadcopter.' },
+    { cat:'School', catLabel:SCHOOL, title:'CFD Incompressible Flow Solver (MATLAB)', status:'done', period:'Engineering Analysis', tagList:['MATLAB','CFD','Numerical Methods'], detail:'A MATLAB numerical solver for incompressible fluid-flow behavior — an analysis- and coding-heavy project in computational fluids and numerical methods.' },
+    { cat:'School', catLabel:SCHOOL, title:'Compressible Navier-Stokes Solver (MATLAB)', status:'done', period:'Engineering Analysis', tagList:['MATLAB','CFD','Navier-Stokes'], detail:'A MATLAB project solving the compressible Navier-Stokes equations, building on my computational fluids and numerical-methods work.' },
+    { cat:'School', catLabel:SCHOOL, title:'Airfoil Shape Optimizer', status:'done', period:'Engineering Analysis', tagList:['MATLAB','CFD','Optimization'], detail:'A computational tool for optimizing airfoil and wing geometry, using numerical methods to evaluate aerodynamic performance and iteratively refine the shape toward target objectives.' },
+
+    /* index-only: Personal */
+    { cat:'Personal', catLabel:PERSONAL, title:'RC522 RFID System', status:'wip', period:'Personal · In Progress', tagList:['MFRC522','Arduino','Embedded'], detail:'A small electronics project using an RC522 RFID reader for tag/card detection — access, identification or triggering actions.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'ESP32 LED Controller', status:'done', period:'Personal', tagList:['ESP32','Web UI','IoT'], detail:'A WiFi-enabled LED controller built on an ESP32 with a custom browser UI for controlling LED patterns, colors and modes wirelessly.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'Resin Printing Mechanical Parts Workflow', status:'done', period:'Fabrication', tagList:['MSLA','GK3 Ultra','Tolerances'], detail:'A functional resin-printing workflow on the Uniformation GK3 Ultra — working through tolerances, wall thickness, ribs, waterproofing, curing and resin selection for mechanical parts.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'CAD Collaboration / Syncthing Workflow', status:'done', period:'Collaboration Setup', tagList:['Syncthing','Collaboration'], detail:'A setup for sharing CAD files, code and project folders across two computers with a friend. I evaluated GitHub but chose Syncthing for folder syncing.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'Ball-Balancing Robot', status:'done', period:'Robotics', tagList:['Control','IMU','Feedback'], detail:'A control project focused on balancing a ball using feedback control.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'Self-Balancing Robot', status:'done', period:'Robotics', tagList:['IMU','Motors','Control'], detail:'A self-balancing robot using an IMU, motors and feedback control.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'Gesture-Controlled Robot', status:'done', period:'Robotics', tagList:['Sensors','Control'], detail:'A robot controlled through gestures rather than a standard joystick or button input.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'Automated Plant Watering System', status:'done', period:'Electronics', tagList:['Moisture Sensing','Pump','MCU'], detail:'An automation project using moisture sensing, a pump/valve and microcontroller logic to water plants automatically.' },
+    { cat:'Personal', catLabel:PERSONAL, title:'Home Automation Project', status:'done', period:'Electronics', tagList:['IoT','Sensors','MCU'], detail:'A smart-home style electronics project involving sensors, microcontrollers and connected-device control.' },
+
+    /* index-only: Work */
+    { cat:'Work', catLabel:WORK, title:'3D-Printed Production Tooling (Delta)', status:'done', period:'Delta Air Lines', tagList:['3D Printing','Tooling','Locators'], detail:'Designed and 3D-printed production tooling at Delta — aluminum trim guides, P-seal hole and cut locators, sheet-metal plates and more — plus shear testing on glue-bond strength.' },
+    { cat:'Work', catLabel:WORK, title:'Conveyor Bumper Safety Project', status:'done', period:'Heatcraft', tagList:['Safety','3D Printing'], detail:'A manufacturing safety-improvement project: 3D-printed conveyor bumpers to reduce risk and improve shop-floor handling.' },
+    { cat:'Work', catLabel:WORK, title:'Sheet-Metal Scratch Reduction', status:'done', period:'Manufacturing', tagList:['Process','Tooling','Quality'], detail:'A process-improvement project aimed at reducing scratches on sheet-metal parts through changes to handling, tooling and workflow.' },
+    { cat:'Work', catLabel:WORK, title:'Press-Brake Suction-Cup Handling', status:'done', period:'Manufacturing Automation', tagList:['Automation','Tooling'], detail:'A handling/tooling project using suction cups near a press brake for safer, easier and more repeatable part handling.' },
+    { cat:'Work', catLabel:WORK, title:'Brazing Valve Heat-Shield', status:'done', period:'Manufacturing', tagList:['Process','Thermal'], detail:'A design/process project to protect valves from heat during brazing, improving reliability and preventing damage during manufacturing.' },
+    { cat:'Work', catLabel:WORK, title:'Arduino PLC / Automation Work', status:'done', period:'Automation', tagList:['PLC','Control','Arduino'], detail:'Automation work involving Arduino-style PLC logic and control systems tied to manufacturing and production.' },
+    { cat:'Work', catLabel:WORK, title:'Bent-Tube Drilling Jig / Hole-Spacing Tool', status:'done', period:'CAD / Fabrication', tagList:['Fixture','CAD'], detail:'A fixture for accurately drilling holes into a bent tube using a straight tool, preserving correct hole spacing from the bent CAD model onto a straight drilling setup.' },
+    { cat:'Work', catLabel:WORK, title:'TPU Suction-Cup 3D Printing', status:'done', period:'Fabrication Experiment', tagList:['TPU','FDM','Tooling'], detail:'A flexible 3D-printing experiment using TPU to create suction cups and suction-style tooling, connecting fabrication with manufacturing-tooling needs.' },
+  ];
+
+  /* ── helpers ── */
+  function statusBadge(status, large) {
+    var wip = '<span class="badge-wip' + (large ? ' lg' : '') + '"><span class="badge-wip-dot"></span>IN PROGRESS</span>';
+    var done = '<span class="badge-complete' + (large ? ' lg' : '') + '">✓ COMPLETE</span>';
+    return status === 'done' ? done : wip;
+  }
+  function idxStatus(status) {
+    if (status === 'done') return '<span class="idx-complete"><span class="idx-complete-sq"></span>COMPLETE</span>';
+    return '<span class="idx-wip"><span class="idx-wip-dot"></span>IN PROGRESS</span>';
+  }
+  function el(tag, cls, inner) {
+    var d = document.createElement(tag);
+    if (cls) d.className = cls;
+    if (inner) d.innerHTML = inner;
+    return d;
+  }
+
+  /* ── render cards grid ── */
+  var cardsGrid = document.getElementById('cards-grid');
+  var DOT = ' · ';
+  projects.filter(function(p){ return p.card && !p.featured; }).forEach(function(p) {
+    var card = el('div', 'proj-card');
+    card.innerHTML =
+      '<div class="proj-card-img">' +
+        '<span>' + (p.ph || '[ ' + p.title + ' ]') + '</span>' +
+        '<span class="card-num">' + p.num + '</span>' +
+        statusBadge(p.status, false) +
+      '</div>' +
+      '<div class="proj-card-body">' +
+        '<div class="card-tags-line">' + (p.tagList || []).join(DOT) + '</div>' +
+        '<h3 class="card-title"></h3>' +
+        '<p class="card-blurb"></p>' +
+        '<div class="card-more">LEARN MORE →</div>' +
+      '</div>';
+    card.querySelector('.card-title').textContent = p.title;
+    card.querySelector('.card-blurb').textContent = p.blurb;
+    card.addEventListener('click', function(){ openModal(p); });
+    cardsGrid.appendChild(card);
+  });
+
+  /* ── render project index ── */
+  var groupDefs = [
+    { key:'School',   label: SCHOOL   },
+    { key:'Personal', label: PERSONAL },
+    { key:'Work',     label: WORK     },
+  ];
+  var indexGroupsEl = document.getElementById('index-groups');
+  var n = 0;
+  groupDefs.forEach(function(g) {
+    var items = projects.filter(function(p){ return p.cat === g.key; });
+    var groupEl = el('div');
+    var labelEl = el('div', 'index-group-label');
+    labelEl.textContent = g.label;
+    var listEl = el('div', 'index-group-list');
+    items.forEach(function(p) {
+      n++;
+      var row = el('div', 'index-row');
+      var nSpan = el('span', 'index-n');
+      nSpan.textContent = String(n).padStart(2, '0');
+      var titleSpan = el('span', 'index-title');
+      titleSpan.textContent = p.title;
+      var statusSpan = el('span');
+      statusSpan.innerHTML = idxStatus(p.status);
+      row.appendChild(nSpan);
+      row.appendChild(titleSpan);
+      row.appendChild(statusSpan);
+      row.addEventListener('click', function(){ openModal(p); });
+      listEl.appendChild(row);
+    });
+    groupEl.appendChild(labelEl);
+    groupEl.appendChild(listEl);
+    indexGroupsEl.appendChild(groupEl);
+  });
+  document.getElementById('index-count').textContent = n + ' ENTRIES';
+
+  /* ── featured card click ── */
+  var featuredProj = projects.find(function(p){ return p.featured; });
+  document.getElementById('featured-card').addEventListener('click', function(){ openModal(featuredProj); });
+
+  /* ── modal ── */
+  var overlay   = document.getElementById('modal-overlay');
+  var modalCat  = document.getElementById('modal-cat');
+  var modalPh   = document.getElementById('modal-ph');
+  var modalStatus = document.getElementById('modal-status-badge');
+  var modalTitle  = document.getElementById('modal-title');
+  var modalPeriod = document.getElementById('modal-period');
+  var modalDetail = document.getElementById('modal-detail');
+  var modalTags   = document.getElementById('modal-tags');
+
+  function openModal(p) {
+    modalCat.textContent    = p.catLabel || '';
+    modalTitle.textContent  = p.title;
+    modalPeriod.textContent = p.period || '';
+    modalDetail.textContent = p.detail || '';
+    modalPh.textContent     = p.ph || '[ ' + p.title + ' ]';
+    if (p.status === 'done') {
+      modalStatus.className = 'badge-complete lg';
+      modalStatus.innerHTML = '✓ COMPLETE';
+    } else {
+      modalStatus.className = 'badge-wip lg';
+      modalStatus.innerHTML = '<span class="badge-wip-dot"></span>IN PROGRESS';
+    }
+    modalTags.innerHTML = (p.tagList || []).map(function(t){
+      var s = document.createElement('span');
+      s.className = 'modal-tag';
+      s.textContent = t;
+      return s.outerHTML;
+    }).join('');
+    overlay.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(); });
+  document.getElementById('modal-box').addEventListener('click', function(e){ e.stopPropagation(); });
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+
+  /* ── scroll reveal ── */
+  function reveal() {
+    var els = document.querySelectorAll('[data-reveal]');
+    if (!window.IntersectionObserver) {
+      els.forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    requestAnimationFrame(function(){
+      els.forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.92) el.classList.add('visible');
+        else io.observe(el);
+      });
+    });
+    setTimeout(function(){ els.forEach(function(el){ el.classList.add('visible'); }); }, 2000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+  else reveal();
+
+}());
+</script>
+</body>
+</html>
