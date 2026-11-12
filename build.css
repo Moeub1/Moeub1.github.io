@@ -1,0 +1,187 @@
+/* V5 (seeded from V4): original local workbench scene. No reference-site source. */
+:root { --ink:#24282b; --blue:#2a52cc; --paper:#f4f3ec; }
+body { background-size:40px 40px; background-image:linear-gradient(#deddd43b 1px,transparent 1px),linear-gradient(90deg,#deddd43b 1px,transparent 1px); font-family:'Space Grotesk', 'Arial', sans-serif; }
+.nav { padding:20px 40px; background:#f4f3eced; border-bottom-color:#24282b25; backdrop-filter:none; }
+.nav-logo { letter-spacing:-.06em; font-size:23px; }
+.nav-links { font-family:ui-monospace,monospace; font-size:10px; gap:20px; }
+.nav-badge { border:0; background:transparent; font-size:9px; }
+.container { max-width:1320px; }
+[data-reveal] { opacity:1; transform:none; transition:none; }
+.hero { position:relative; grid-template-columns:1.14fr 1fr; gap:0 45px; padding:0; align-items:center; }
+.bench-heading { grid-column:1/-1; display:flex; justify-content:space-between; font:9px ui-monospace,monospace; letter-spacing:.11em; color:#636762; padding:25px 0; border-bottom:1px solid #24282b24; }
+.hero-copy { position:relative; padding:44px 0 60px; }
+.hero-kicker { margin-bottom:28px; font:10px ui-monospace,monospace; letter-spacing:.06em; }
+.hero-kicker-line { width:30px; }
+.hero-h1 { font-size:clamp(48px,5.8vw,80px); letter-spacing:-.065em; line-height:1.02; font-weight:600; }
+.title-line { display:block; white-space:nowrap; }
+.hero-h1 em { font-style:normal; color:var(--blue); }
+.hero-p { font-size:16px; max-width:450px; color:#565b58; line-height:1.8; margin-top:28px; }
+.hero-btns { margin-top:30px; gap:12px; }
+.btn-primary,.btn-outline { font-size:13px; padding:15px 22px; }
+.btn-primary { background:var(--blue); min-width:180px; display:flex; justify-content:space-between; gap:25px; }
+.btn-primary:hover { background:var(--ink); }
+.btn-outline { border-color:#24282b40; }
+.bench-note { margin-top:42px; color:#68706c; font:11px ui-monospace,monospace; display:flex; align-items:center; gap:12px; }
+.note-cross { color:var(--blue); font-size:20px; }
+.title-work { position:absolute; top:76px; left:0; right:0; height:205px; pointer-events:none; display:none; }
+/* V5: overlay is sized by JS to the live h1 box; strokes are traced from the rendered glyphs. */
+.title-draw { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.portrait-assembly { margin:0 -12px 0 0; min-width:0; align-self:center; position:relative; }
+.portrait-stage { position:relative; aspect-ratio:500/620; width:100%; }
+.portrait-fallback { position:absolute; left:12.4%; top:11.613%; width:72%; height:74.194%; object-fit:cover; object-position:50% 50%; display:block; }
+.assembly-svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.tool-layer { pointer-events:none; }
+.construction-geometry,.tool,#printed-rail,#portrait-tiles,#mounts,#circuit,#solder-pads { display:none; }
+.finished-frame { opacity:1; }
+.portrait-signature { font:8px ui-monospace,monospace; letter-spacing:1px; fill:#6a716b; }
+.tool { stroke-linejoin:round; stroke-linecap:round; }
+.tool text { fill:#5c6869; font:7px ui-monospace,monospace; letter-spacing:1px; stroke:none; }
+.dimension-lines text { font:7px ui-monospace,monospace; stroke:none; fill:#2a52cc; }
+.code-terminal { position:absolute; bottom:6.5%; left:39%; background:var(--paper); border:1px solid #24282b35; padding:10px 12px; min-width:210px; display:flex; gap:12px; box-shadow:5px 5px 0 #24282b08; transform:rotate(-2deg); font:9px ui-monospace,monospace; }
+.code-terminal span { color:#6c756e; font-size:8px; }
+.code-terminal code { color:#397463; font:inherit; white-space:nowrap; }
+.code-terminal i { font-style:normal; color:#397463; }
+.portrait-assembly figcaption { display:flex; justify-content:space-between; font:8px ui-monospace,monospace; letter-spacing:.08em; padding:0 12.4% 20px; color:#555e58; }
+.bench-footer { grid-column:1/-1; border-top:1px solid #24282b30; display:flex; align-items:center; gap:20px; min-height:63px; font:9px ui-monospace,monospace; color:#68706c; }
+.build-readout { display:flex; align-items:center; gap:9px; flex:1; }
+.readout-dot { width:5px; height:5px; background:#397463; border-radius:50%; }
+.build-controls { display:flex; }
+[hidden] { display:none !important; }
+.build-controls button { cursor:pointer; background:transparent; border:1px solid #24282b40; color:var(--ink); font:10px ui-monospace,monospace; padding:10px 13px; min-height:40px; }
+.build-controls button:hover { background:var(--ink); color:var(--paper); }
+.scroll-note { margin-left:14px; }
+.sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+/* Only the hero is a construction scene. Rest stays readable and scrollable. */
+.section { padding:70px 0; border-top:1px solid #24282b40; }
+#about { border-top:0; }
+.section-label { font:10px ui-monospace,monospace; letter-spacing:.1em; }
+.about-h2 { font-size:42px; letter-spacing:-.045em; font-weight:500; }
+.about-p { font-size:16px; color:#565b58; }
+.about-stats { border-top:1px solid #24282b25; padding-top:25px; }
+.stat-num { font-weight:500; color:#2a52cc; }
+.edu-card,.proj-card,.featured-card { background:#f4f3ec; border-color:#24282b60; }
+.tag,.featured-tag { border-color:#24282b40; }
+.proj-card-img,.featured-img,.modal-img { background:repeating-linear-gradient(135deg,#e8e8de 0 1px,#efefe6 1px 12px); }
+.ph-chip { color:#686b60; border:1px dashed #b0b3a5; background:#f4f3ecb0; }
+.featured-card:focus-visible,.proj-card:focus-visible,.index-row:focus-visible,button:focus-visible,a:focus-visible { outline:3px solid #2a52cc; outline-offset:4px; }
+.modal-overlay { z-index:100; }
+.modal-close { width:44px; height:44px; flex-shrink:0; }
+/* CSS-only release if the controller stalls. Normal cleanup removes all tools. */
+.is-building .portrait-fallback { opacity:0; animation:v4-visible 1ms 19s forwards; }
+.is-building .construction-geometry,.is-building .tool,.is-building #printed-rail,.is-building #portrait-tiles,.is-building #mounts,.is-building #circuit,.is-building #solder-pads { display:block; }
+.is-building .assembly-svg { animation:v4-clear 1ms 19s forwards; }
+.is-building .title-work { display:block; animation:v4-clear 1ms 19s forwards; }
+.is-building .title-line { animation:v4-visible 1ms 19s forwards; }
+/* V5 load-flash guard; build.js removes the class when the build starts or settles. */
+.v5-prebuild .title-line { opacity:0; animation:v4-visible 1ms 2.5s forwards; }
+.has-built #mounts,.has-built #circuit,.has-built #solder-pads { display:block; }
+@keyframes v4-visible { to { opacity:1; transform:none; } }
+@keyframes v4-clear { to { opacity:0; visibility:hidden; } }
+@media (max-width:1050px) {
+ .nav { gap:18px; padding:16px 24px; flex-wrap:wrap; }
+ .nav-links { flex-wrap:wrap; gap:12px; line-height:1.8; }
+ .nav-badge { display:none; }
+ .hero { gap:0 16px; }
+ .hero-h1 { font-size:clamp(40px,5.7vw,64px); }
+ .hero-copy { padding:32px 0; }
+ .hero-p { font-size:14px; }
+ .hero-kicker { font-size:8px; }
+ .bench-note { font-size:9px; }
+ .interests-grid { grid-template-columns:repeat(3,1fr); }
+ .code-terminal { min-width:180px; left:28%; font-size:8px; }
+ .scroll-note { display:none; }
+}
+@media (max-width:700px) {
+ .nav { padding:12px 22px; gap:8px; }
+ .nav-links { width:100%; gap:4px 16px; font-size:9px; }
+ .nav-links a { min-height:25px; display:inline-flex; align-items:center; gap:4px; }
+ .container { padding:0 22px; }
+ .hero { grid-template-columns:1fr; }
+ .bench-heading { font-size:8px; line-height:1.6; padding:16px 0; gap:25px; }
+ .bench-heading span:last-child { text-align:right; }
+ .hero-copy { padding:32px 0 12px; }
+ .hero-h1 { font-size:clamp(40px,10.7vw,68px); }
+ .hero-kicker { margin-bottom:20px; font-size:9px; }
+ .hero-p { font-size:14px; margin-top:20px; max-width:100%; }
+ .hero-btns { margin-top:22px; }
+ .btn-primary,.btn-outline { padding:14px 16px; font-size:12px; }
+ .bench-note { margin-top:24px; font-size:10px; }
+ .portrait-assembly { width:min(100%,430px); margin:0 auto; }
+ .portrait-stage { margin-top:-8px; }
+ .portrait-assembly figcaption { padding-bottom:24px; }
+ .title-work { top:55px; height:150px; }
+ .bench-footer { min-height:70px; gap:8px; }
+ .build-readout { font-size:8px; line-height:1.5; }
+ .build-controls button { font-size:9px; padding:8px; white-space:nowrap; }
+ .section { padding:44px 0; scroll-margin-top:135px; }
+ .about-grid,.exp-skills-grid,.contact-grid,.featured-card { grid-template-columns:1fr; gap:28px; }
+ .about-h2 { font-size:34px; }
+ .about-p { font-size:15px; }
+ .about-stats { gap:24px; }
+ .edu-card { padding:24px; grid-template-columns:auto 1fr; gap:18px; }
+ .edu-date { grid-column:1/-1; text-align:left; }
+ .edu-title { font-size:20px; }
+ .exp-col { padding-right:0; }
+ .toolkit-col { border-left:0; border-top:1px solid #24282b; padding:28px 0 0; }
+ .tl-meta { flex-wrap:wrap; gap:6px; }
+ .featured-body { padding:26px; }
+ .featured-img { border-left:0; border-top:1px solid #24282b; min-height:220px; }
+ .featured-title { font-size:26px; }
+ .cards-grid { grid-template-columns:1fr; }
+ .index-row { grid-template-columns:24px 1fr; gap:8px; }
+ .index-row>:last-child { grid-column:2; }
+ .proj-header,.proj-index-hdr { flex-wrap:wrap; gap:12px; }
+ .interests-grid { grid-template-columns:repeat(2,1fr); }
+ .contact-section { padding:48px 0 60px; scroll-margin-top:135px; }
+ .contact-h2 { font-size:40px; }
+ .contact-row { gap:12px; flex-wrap:wrap; }
+ .contact-row-val { overflow-wrap:anywhere; }
+ footer { gap:14px; flex-wrap:wrap; padding:24px 22px; }
+ .modal-overlay { padding:16px 12px; }
+ .modal-body { padding:22px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ html { scroll-behavior:auto; }
+ *,*::before,*::after { animation:none !important; transition:none !important; }
+ .portrait-fallback,.title-line { opacity:1 !important; transform:none !important; }
+ .title-work,.construction-geometry,.tool,#portrait-tiles,#printed-rail,#mounts,#circuit,#solder-pads { display:none !important; }
+ /* V6: section overlay and floating build control carry no meaning without motion. */
+ .sec-overlay { display:none !important; }
+}
+
+/* V6 revision 2: actual-content masks and exact structural border handoffs.
+   None of these hide content until the controller has installed recovery listeners. */
+.sec-overlay { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:40; overflow:hidden; }
+.sec-tool { stroke-linejoin:round; stroke-linecap:round; }
+.vb-mask { clip-path:inset(0 100% 0 0); }
+.vb-mask,.vb-border,.vb-spine { transition:none !important; }
+.vb-border { border-color:transparent !important; }
+.vb-running { animation:vb-release 1ms 5s forwards; }
+@keyframes vb-release { to { clip-path:none; } }
+/* Each timeline entry owns a real, persistent piece of spine. No whole-section sweep. */
+.timeline { border-left-color:transparent; }
+.tl-item::before,.tl-biz::before { content:''; position:absolute; left:-27px; top:0; bottom:-30px; width:1px; background:#1c1b18; }
+.tl-biz::before { bottom:0; }
+.vb-spine::before { clip-path:inset(0 0 calc(100% - var(--vb-spine,0px)) 0); }
+.sec-ctl { position:sticky; z-index:51; display:flex; align-items:center; justify-content:flex-end; gap:10px; padding:5px 40px; min-height:44px; background:#f4f3ec; border-bottom:1px solid #24282b25; }
+.sec-ctl>span { margin-right:auto; font:9px ui-monospace,monospace; letter-spacing:.12em; color:#68706c; }
+.sec-ctl button { cursor:pointer; background:transparent; border:1px solid #24282b55; color:#24282b; font:10px ui-monospace,monospace; padding:8px 12px; min-height:34px; }
+.sec-ctl button:hover { background:#24282b; color:#f4f3ec; }
+.sec-ctl button:disabled { cursor:default; opacity:.55; }
+.sec-ctl button:focus-visible { outline:3px solid #2a52cc; outline-offset:2px; }
+@media (max-width:700px) {
+ .sec-ctl { padding:5px 22px; gap:8px; }
+ .sec-ctl button { padding:8px; font-size:9px; }
+}
+/* Native hash/scrollIntoView clearance uses the actual measured sticky stack.
+   Fallbacks reserve the nav alone if the page controller never loads. */
+html { scroll-padding-top:calc(var(--sticky-stack-height,72px) + 12px); }
+.hero,.section,.contact-section,#top { scroll-margin-top:0; }
+@media (max-width:700px) {
+ html { scroll-padding-top:calc(var(--sticky-stack-height,135px) + 12px); }
+}
+@media (prefers-reduced-motion:reduce) {
+ .vb-mask { clip-path:none !important; }
+ .vb-border { border-color:#24282b60 !important; }
+ .vb-spine::before { clip-path:none !important; }
+}
